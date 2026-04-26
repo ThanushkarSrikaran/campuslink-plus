@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Space Theme Foundation ───────────────────────────────────────────── */
+
+:root {
+  --space-bg: #06020f;
+  --glow-purple: 0 0 30px rgba(139, 92, 246, 0.25);
+  --glow-blue:   0 0 30px rgba(99, 102, 241, 0.2);
+  --glow-cyan:   0 0 20px rgba(34, 211, 238, 0.2);
+  --border-space: rgba(139, 92, 246, 0.2);
+}
+
+html, body {
+  background-color: #06020f;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Nebula layer — fixed behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse at 20% 25%, rgba(120, 40, 220, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 75%, rgba(59, 80, 220, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 45%, rgba(76, 29, 149, 0.07) 0%, transparent 60%);
+}
+
+/* Star field — fixed, tiling */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at  8%  12%, rgba(255,255,255,0.85), transparent),
+    radial-gradient(1px 1px at 22%  5%,  rgba(255,255,255,0.6),  transparent),
+    radial-gradient(1px 1px at 38% 18%,  rgba(255,255,255,0.5),  transparent),
+    radial-gradient(1px 1px at 55%  9%,  rgba(255,255,255,0.7),  transparent),
+    radial-gradient(1px 1px at 70%  3%,  rgba(255,255,255,0.5),  transparent),
+    radial-gradient(1px 1px at 88% 14%,  rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 14% 30%,  rgba(255,255,255,0.4),  transparent),
+    radial-gradient(1px 1px at 30% 42%,  rgba(255,255,255,0.55), transparent),
+    radial-gradient(1px 1px at 47% 35%,  rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 63% 28%,  rgba(255,255,255,0.6),  transparent),
+    radial-gradient(1px 1px at 79% 38%,  rgba(255,255,255,0.4),  transparent),
+    radial-gradient(1px 1px at 94% 25%,  rgba(255,255,255,0.7),  transparent),
+    radial-gradient(1px 1px at  5% 55%,  rgba(255,255,255,0.5),  transparent),
+    radial-gradient(1px 1px at 18% 68%,  rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 35% 60%,  rgba(255,255,255,0.4),  transparent),
+    radial-gradient(1px 1px at 52% 72%,  rgba(255,255,255,0.55), transparent),
+    radial-gradient(1px 1px at 67% 58%,  rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 83% 65%,  rgba(255,255,255,0.6),  transparent),
+    radial-gradient(1px 1px at 97% 50%,  rgba(255,255,255,0.5),  transparent),
+    radial-gradient(1px 1px at 10% 82%,  rgba(255,255,255,0.7),  transparent),
+    radial-gradient(1px 1px at 26% 88%,  rgba(255,255,255,0.4),  transparent),
+    radial-gradient(1px 1px at 43% 95%,  rgba(255,255,255,0.55), transparent),
+    radial-gradient(1px 1px at 60% 80%,  rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 75% 90%,  rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 91% 85%,  rgba(255,255,255,0.6),  transparent),
+    radial-gradient(2px 2px at 32% 22%,  rgba(180,180,255,0.5),  transparent),
+    radial-gradient(2px 2px at 72% 48%,  rgba(180,200,255,0.45), transparent),
+    radial-gradient(2px 2px at 16% 75%,  rgba(200,180,255,0.5),  transparent),
+    radial-gradient(2px 2px at 58% 92%,  rgba(180,220,255,0.4),  transparent),
+    radial-gradient(1.5px 1.5px at 85% 10%, rgba(220,200,255,0.6), transparent);
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+/* All content must be above the pseudo-element layers */
+#__next, main, .relative, [class*="z-"] {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Animations ───────────────────────────────────────────────────────── */
+
+@keyframes twinkle {
+  0%   { opacity: 0.55; }
+  50%  { opacity: 0.85; }
+  100% { opacity: 0.45; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+  50%       { box-shadow: 0 0 35px rgba(139, 92, 246, 0.6); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── Utility Classes ──────────────────────────────────────────────────── */
+
+.space-card {
+  background: rgba(15, 5, 35, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.space-card-hover {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.space-card-hover:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(139,92,246,0.12);
+}
+
+.space-btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  transition: box-shadow 0.2s, opacity 0.2s;
+}
+
+.space-btn-primary:hover {
+  box-shadow: 0 4px 28px rgba(124, 58, 237, 0.65);
+  opacity: 0.92;
+}
+
+.space-input {
+  background: rgba(15, 5, 40, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  color: white;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.space-input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.7);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.space-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+}
+
+.planet-ring {
+  animation: orbit 20s linear infinite;
+}
+
+.float-anim {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.45s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-150%) skewX(-12deg); }
+  100% { transform: translateX(350%) skewX(-12deg); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes beacon-ring {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.beacon-ring {
+  animation: beacon-ring 2.5s ease-out infinite;
+}
